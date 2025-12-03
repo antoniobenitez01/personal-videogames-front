@@ -1,0 +1,42 @@
+@if(videogames.length == 0){
+  <h1>Connection Error. Too Bad !</h1>
+}@else {
+  <table class="table table-striped table-bordered">
+    <thead class="table-dark">
+      <tr>
+        <th>ID</th>
+        <th>TITLE</th>
+        <th>PLATFORM</th>
+        <th>RATING</th>
+        <th>COLLECTION</th>
+        <th>ROMHACK</th>
+        <th>FAVOURITE</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (game of videogames; track game.id) {
+        <tr>
+          <td class="id">{{ game.id }}</td>
+          <td>{{ game.title }}</td>
+          <td>{{ game.platform }}</td>
+          <td class="rating">{{ game.rating }}</td>
+          <td class="cellcenter">
+            @if(game.collection){
+              &#x2705;
+            }
+          </td>
+          <td class="cellcenter">
+            @if(game.romhack){
+              &#x2705;
+            }
+          </td>
+          <td class="cellcenter">
+            @if(game.favourite){
+              &#x2B50;
+            }
+          </td>
+        </tr>
+      }
+    </tbody>
+  </table>
+}

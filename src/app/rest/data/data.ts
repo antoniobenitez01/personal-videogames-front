@@ -3,10 +3,10 @@ import { Component } from '@angular/core';
 import { Videogame } from '../interfaces/videogame';
 
 @Component({
-  selector: 'app-rest',
-  imports: [],
+  selector: 'app-data',
   templateUrl: './data.html',
   styleUrl: './data.css',
+  standalone : false
 })
 export class DataRetrieveComponent {
 
