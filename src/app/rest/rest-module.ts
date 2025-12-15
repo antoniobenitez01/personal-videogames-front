@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { DataRetrieveComponent } from './data/data';
+import { DataRetrieveComponent } from './main/data/data';
 import { MainPageComponent } from './main/main';
 
 
