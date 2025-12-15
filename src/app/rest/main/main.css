@@ -1,0 +1,11 @@
+#maintable{
+  display:flex;
+  text-align:center;
+  align-items:center;
+  justify-content:center;
+  flex-direction:column;
+  background-color:blue;
+  padding:1vw;
+  border-radius:10px;
+  margin-bottom:5vh
+}

@@ -1,0 +1,23 @@
+#mokatitle{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  vertical-align:middle;
+  height:50vh;
+  background-color:red;
+  animation: wobble 2s linear infinite;
+}
+
+@keyframes wobble {
+    0%, 100% {
+      -webkit-transform: translateX(calc(5px / 2)) rotate(0.5deg);
+      transform: translateX(calc(5px / 2)) rotate(0.5deg);
+      -webkit-transform-origin: 50% 50%;
+      transform-origin: 50% 50%;
+    }
+
+    50% {
+      -webkit-transform: translateX(-5px) rotate(-0.5deg);
+      transform: translateX(-5px) rotate(-0.5deg);
+    }
+}
