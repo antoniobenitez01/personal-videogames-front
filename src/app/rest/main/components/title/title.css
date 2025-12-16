@@ -4,7 +4,7 @@
   align-items:center;
   vertical-align:middle;
   height:50vh;
-  background-color:red;
+  /*background-color:red;*/   /*DEBUG*/
   animation: wobble 2s linear infinite;
 }
 
