@@ -4,6 +4,7 @@ export interface Videogame {
   platform: string;
   rating: string;
   collection: boolean;
-  romhack: boolean;
+  fangame: boolean;
+  flash: boolean;
   favourite: boolean;
 }

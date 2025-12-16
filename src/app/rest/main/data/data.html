@@ -10,7 +10,8 @@
         <th>PLATFORM</th>
         <th>RATING</th>
         <th>COLLECTION</th>
-        <th>ROMHACK</th>
+        <th>FANGAME</th>
+        <th>FLASH</th>
         <th>FAVOURITE</th>
       </tr>
     </thead>
@@ -19,7 +20,7 @@
         <tr>
           <td class="id">{{ game.id }}</td>
           <td>{{ game.title }}</td>
-          <td>{{ game.platform }}</td>
+          <td>{{ game.platform.replaceAll("_"," ") }}</td>
           <td class="rating">{{ game.rating }}</td>
           <td class="cellcenter">
             @if(game.collection){
@@ -27,7 +28,12 @@
             }
           </td>
           <td class="cellcenter">
-            @if(game.romhack){
+            @if(game.fangame){
+              &#x2705;
+            }
+          </td>
+          <td class="cellcenter">
+            @if(game.flash){
               &#x2705;
             }
           </td>
