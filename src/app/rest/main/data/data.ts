@@ -18,7 +18,7 @@ export class DataRetrieveComponent {
 
   update(){
     this.videogames = [];
-    this.http.get<Videogame[]>("http://localhost:8080/videogames")
+    this.http.get<Videogame[]>("http://localhost:8080/games/all")
     .subscribe({
       next: (data) => this.videogames = data,
       error: (err) => console.error(err)
