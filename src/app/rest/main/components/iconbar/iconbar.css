@@ -1,3 +1,13 @@
-.iconbar{
+#iconbar{
+  display:flex;
+  flex-direction:row;
   background-color:green;
+}
+
+#update{
+  margin-left:auto;
+}
+
+#add{
+  margin-right:auto;
 }
