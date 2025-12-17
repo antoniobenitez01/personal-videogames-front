@@ -3,14 +3,14 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "ng serve --port 2025",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "git:add" : "git add .",
     "git:commit" : "git commit -m \"Automatic Angular Push\"",
     "git:push" : "git push -u origin main",
-    "git:auto" : "npm run git:add && npm run git:commit && npm run git:push"
+    "git:auto" : "npm run git:add && npm run git:commit && npm run git:push && npm run start"
   },
   "prettier": {
     "printWidth": 100,
