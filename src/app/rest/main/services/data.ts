@@ -7,7 +7,6 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class DataService {
-  videogames : Videogame[] = [];
   private url : string = "http://localhost:8080/games";
 
   constructor(private http : HttpClient) {}

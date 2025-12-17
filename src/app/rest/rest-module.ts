@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { TableComponent } from './main/components/table/table';
 import { MainPageComponent } from './main/main';
 import { TitleComponent } from './main/components/title/title';
+import { Iconbar } from './main/components/iconbar/iconbar';
 
 
 
@@ -10,7 +11,8 @@ import { TitleComponent } from './main/components/title/title';
   declarations: [
     TableComponent,
     MainPageComponent,
-    TitleComponent
+    TitleComponent,
+    Iconbar,
   ],
   imports: [
     CommonModule

@@ -1,24 +1,44 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter } from '@angular/core';
 import { Videogame } from '../../interfaces/videogame';
 import { DataService } from '../../services/data';
-import { interval, Subscription } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
+//import { interval, Subscription } from 'rxjs';
+//import { switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-table',
   templateUrl: './table.html',
   styleUrl: './table.css',
-  standalone : false
+  standalone : false,
 })
 export class TableComponent {
 
   videogames : Videogame[] = [];
-  private subscription! : Subscription;
+  //private subscription! : Subscription;
 
-  constructor( private dataService : DataService) {}
+  constructor( private dataService : DataService) {
+    this.updateData();
+  }
 
-  ngOnInit(): void {
-    this.subscription = interval(100).pipe(
+  updateData(){
+    this.dataService.getVideogames().subscribe({
+      next: (data) => {
+        this.videogames = data;
+      },
+      error: (error) => {
+        console.error("ERROR - Error fetching VIDOEGAMES : ", error);
+      }
+    });
+  }
+
+  onUpdate(event : boolean){
+    if(event){
+      this.updateData();
+    }
+  }
+
+  // INTERVAL CODE
+  /*ngOnInit(): void {
+    this.subscription = interval(200).pipe(
       switchMap(() => this.dataService.getVideogames())
     ).subscribe({
       next: (data) => {
@@ -34,12 +54,13 @@ export class TableComponent {
     if(this.subscription){
       this.subscription.unsubscribe();
     }
-  }
+  }*/
 
   deleteVideogame( id : number){
     this.dataService.deleteVideogame(id).subscribe({
       next: (response) => {
         console.log("Server Response: ", response);
+        this.updateData();
       },
       error: (error) => {
         console.error("Delete failed: ",error);
