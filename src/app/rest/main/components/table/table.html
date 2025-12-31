@@ -1,7 +1,6 @@
 <app-iconbar (update)="onUpdate($event)"></app-iconbar>
 
-<div class="filters mb-3">
-
+<div class="filters mb-1 mt-1">
   <input placeholder="Filter by title" [(ngModel)]="filterTitle" (input)="applyFilters()" class="form-control mb-1" />
 
   <select [(ngModel)]="filterPlatform" (change)="applyFilters()" class="form-control mb-1">
@@ -18,26 +17,29 @@
     }
   </select>
 
-  <div class="form-check form-check-inline">
-    <input type="checkbox" class="form-check-input" id="collectionFilter" [(ngModel)]="filterCollection" (change)="applyFilters()">
-    <label class="form-check-label" for="collectionFilter">Collection</label>
-  </div>
+  <div class="boxfilter mt-1">
 
-  <div class="form-check form-check-inline">
-    <input type="checkbox" class="form-check-input" id="fangameFilter" [(ngModel)]="filterFangame" (change)="applyFilters()">
-    <label class="form-check-label" for="fangameFilter">Fangame</label>
-  </div>
+    <div class="form-check form-check-inline">
+      <input type="checkbox" class="form-check-input" id="collectionFilter" [(ngModel)]="filterCollection" (change)="applyFilters()">
+      <label class="form-check-label" for="collectionFilter">Collection</label>
+    </div>
 
-  <div class="form-check form-check-inline">
-    <input type="checkbox" class="form-check-input" id="flashFilter" [(ngModel)]="filterFlash" (change)="applyFilters()">
-    <label class="form-check-label" for="flashFilter">Flash</label>
-  </div>
+    <div class="form-check form-check-inline">
+      <input type="checkbox" class="form-check-input" id="fangameFilter" [(ngModel)]="filterFangame" (change)="applyFilters()">
+      <label class="form-check-label" for="fangameFilter">Fangame</label>
+    </div>
 
-  <div class="form-check form-check-inline">
-    <input type="checkbox" class="form-check-input" id="favouriteFilter" [(ngModel)]="filterFavourite" (change)="applyFilters()">
-    <label class="form-check-label" for="favouriteFilter">Favourite</label>
-  </div>
+    <div class="form-check form-check-inline">
+      <input type="checkbox" class="form-check-input" id="flashFilter" [(ngModel)]="filterFlash" (change)="applyFilters()">
+      <label class="form-check-label" for="flashFilter">Flash</label>
+    </div>
 
+    <div class="form-check form-check-inline">
+      <input type="checkbox" class="form-check-input" id="favouriteFilter" [(ngModel)]="filterFavourite" (change)="applyFilters()">
+      <label class="form-check-label" for="favouriteFilter">Favourite</label>
+    </div>
+
+  </div>
 </div>
 
 @if(filteredGames.length == 0){
