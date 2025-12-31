@@ -6,6 +6,8 @@ import { MatDialogRef, MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { DataService } from '../../services/data';
+import { ExportVideogame } from '../../interfaces/videogame';
+import { MatOptionModule } from '@angular/material/core';
 
 @Component({
   selector: 'app-addgame',
@@ -15,7 +17,8 @@ import { DataService } from '../../services/data';
     MatFormFieldModule,
     MatInputModule,
     MatCheckboxModule,
-    MatButtonModule
+    MatButtonModule,
+    MatOptionModule
   ],
   templateUrl: './addgame.html',
   styleUrl: './addgame.css',
@@ -68,7 +71,8 @@ export class AddGameComponent {
     "JAVA_PHONE",
     "IOS",
     "ANDROID",
-    "ARCADE"];
+    "ARCADE"
+  ];
   ratings = [
     "SHADOW_REALM",
     "HORRIBLE",
@@ -77,5 +81,33 @@ export class AddGameComponent {
     "GOOD",
     "GREAT",
     "FANTASTIC",
-    "BEST"];
+    "BEST"
+  ];
+
+  submit() {
+    if (this.form.valid) {
+      this.submitting = true;
+
+      const videogame: ExportVideogame = {
+        title: this.form.controls['title'].value,
+        platform: this.form.controls['platform'].value,
+        rating: this.form.controls['rating'].value,
+        collection: this.form.controls['collection'].value,
+        fangame: this.form.controls['fangame'].value,
+        flash: this.form.controls['flash'].value,
+        favourite: this.form.controls['favourite'].value
+      };
+
+      this.dataService.postVideogame(videogame).subscribe({
+        next: (response) => {
+          console.log('Videogame added successfully:', response);
+          this.dialogRef.close(videogame);
+        },
+        error: (err) => {
+          console.error('Error adding videogame:', err);
+          this.submitting = false;
+        }
+      });
+    }
+  }
 }
