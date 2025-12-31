@@ -1,8 +1,18 @@
 <app-iconbar (update)="onUpdate($event)"></app-iconbar>
 <div class="filters mb-3">
   <input placeholder="Filter by title" [(ngModel)]="filterTitle" (input)="applyFilters()" class="form-control mb-1" />
-  <input placeholder="Filter by platform" [(ngModel)]="filterPlatform" (input)="applyFilters()" class="form-control mb-1" />
-  <input placeholder="Filter by rating" [(ngModel)]="filterRating" (input)="applyFilters()" class="form-control" />
+  <select [(ngModel)]="filterPlatform" (change)="applyFilters()" class="form-control mb-1">
+    <option value="">All Platforms</option>
+    @for(p of platforms; track p){
+      <option [value]="p">{{ p.replaceAll("_"," ") }}</option>
+    }
+  </select>
+  <select [(ngModel)]="filterRating" (change)="applyFilters()" class="form-control">
+    <option value="">All Ratings</option>
+    @for(r of ratings; track r){
+      <option [value]="r">{{ r.replaceAll("_"," ") }}</option>
+    }
+  </select>
 </div>
 @if(filteredGames.length == 0){
   <h1>No Videogames. Too Bad !</h1>

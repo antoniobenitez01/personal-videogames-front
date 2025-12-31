@@ -1,6 +1,7 @@
 import { Component, EventEmitter } from '@angular/core';
 import { Videogame } from '../../interfaces/videogame';
 import { DataService } from '../../services/data';
+import { PLATFORMS, RATINGS } from '../../shared/constants';
 //import { interval, Subscription } from 'rxjs';
 //import { switchMap } from 'rxjs/operators';
 
@@ -20,6 +21,9 @@ export class TableComponent {
   filterPlatform = '';
   filterRating = '';
 
+  platforms = PLATFORMS;
+  ratings = RATINGS;
+
   constructor( private dataService : DataService) {
     this.updateData();
   }
@@ -27,8 +31,8 @@ export class TableComponent {
   applyFilters(){
     this.filteredGames = this.videogames.filter(game =>
       game.title.toLowerCase().includes(this.filterTitle.toLowerCase()) &&
-      game.platform.toLowerCase().includes(this.filterPlatform.toLowerCase()) &&
-      game.rating.toLowerCase().includes(this.filterRating.toLowerCase())
+      (this.filterPlatform === '' || game.platform === this.filterPlatform) &&
+      (this.filterRating === '' || game.rating === this.filterRating)
     )
   }
 
@@ -36,7 +40,7 @@ export class TableComponent {
     this.dataService.getVideogames().subscribe({
       next: (data) => {
         this.videogames = data;
-        this.filteredGames = this.videogames;
+        this.filteredGames = [...this.videogames];
       },
       error: (error) => {
         console.error("ERROR - Error fetching VIDOEGAMES : ", error);
