@@ -7,7 +7,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { DataService } from '../../services/data';
 import { ExportVideogame } from '../../interfaces/videogame';
-import { MatOptionModule } from '@angular/material/core';
+import { MatSelectModule } from '@angular/material/select';
+import { PLATFORMS, RATINGS } from '../../shared/constants';
 
 @Component({
   selector: 'app-addgame',
@@ -18,12 +19,13 @@ import { MatOptionModule } from '@angular/material/core';
     MatInputModule,
     MatCheckboxModule,
     MatButtonModule,
-    MatOptionModule
+    MatSelectModule
   ],
   templateUrl: './addgame.html',
   styleUrl: './addgame.css',
 })
 export class AddGameComponent {
+[x: string]: any;
   form = new FormGroup({
     title : new FormControl<string>('',{ nonNullable: true, validators: Validators.required }),
     platform : new FormControl<string>('',{ nonNullable: true, validators: Validators.required }),
@@ -41,48 +43,8 @@ export class AddGameComponent {
     private dataService : DataService
   ){}
 
-  platforms = [
-    "NINTENDO_ENTERTAINMENT_SYSTEM",
-    "SUPER_NINTENDO",
-    "GAME_BOY",
-    "GAME_BOY_COLOR",
-    "GAME_BOY_ADVANCED",
-    "NINTENDO_DS",
-    "NINTENDO_3DS",
-    "NINTENDO_64",
-    "NINTENDO_GAMECUBE",
-    "NINTENDO_WII",
-    "NINTENDO_WII_U",
-    "NINTENDO_SWITCH",
-    "NINTENDO_SWITCH_2",
-    "SEGA_MASTER_SYSTEM",
-    "SEGA_MEGA_DRIVE",
-    "SEGA_GAME_GEAR",
-    "SEGA_SATURN",
-    "SEGA_32X",
-    "SEGA_CD",
-    "SEGA_DREAMCAST",
-    "PLAYSTATION",
-    "PLAYSTATION_2",
-    "PLAYSTATION_3",
-    "PLAYSTATION_4",
-    "NEO_GEO_POCKET_COLOR",
-    "PC",
-    "JAVA_PHONE",
-    "IOS",
-    "ANDROID",
-    "ARCADE"
-  ];
-  ratings = [
-    "SHADOW_REALM",
-    "HORRIBLE",
-    "BAD",
-    "OKAY",
-    "GOOD",
-    "GREAT",
-    "FANTASTIC",
-    "BEST"
-  ];
+  platforms = PLATFORMS;
+  ratings = RATINGS;
 
   submit() {
     if (this.form.valid) {
@@ -100,7 +62,7 @@ export class AddGameComponent {
 
       this.dataService.postVideogame(videogame).subscribe({
         next: (response) => {
-          console.log('Videogame added successfully:', response);
+          console.log(response);
           this.dialogRef.close(videogame);
         },
         error: (err) => {

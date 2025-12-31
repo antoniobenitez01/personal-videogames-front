@@ -4,6 +4,7 @@ import { TableComponent } from './main/components/table/table';
 import { MainPageComponent } from './main/main';
 import { TitleComponent } from './main/components/title/title';
 import { Iconbar } from './main/components/iconbar/iconbar';
+import { FormsModule } from '@angular/forms';
 
 
 
@@ -15,7 +16,8 @@ import { Iconbar } from './main/components/iconbar/iconbar';
     Iconbar,
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    FormsModule
   ],
   exports: [
     MainPageComponent

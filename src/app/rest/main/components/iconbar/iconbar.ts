@@ -22,6 +22,7 @@ export class Iconbar {
     const dialogRef = this.dialog.open(AddGameComponent);
     dialogRef.afterClosed().subscribe(result => {
       console.info(result);
+      this.update.emit(true);
     });
   }
 }

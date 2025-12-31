@@ -13,16 +13,30 @@ import { DataService } from '../../services/data';
 export class TableComponent {
 
   videogames : Videogame[] = [];
+  filteredGames : Videogame[] = [];
   //private subscription! : Subscription;
+
+  filterTitle = '';
+  filterPlatform = '';
+  filterRating = '';
 
   constructor( private dataService : DataService) {
     this.updateData();
+  }
+
+  applyFilters(){
+    this.filteredGames = this.videogames.filter(game =>
+      game.title.toLowerCase().includes(this.filterTitle.toLowerCase()) &&
+      game.platform.toLowerCase().includes(this.filterPlatform.toLowerCase()) &&
+      game.rating.toLowerCase().includes(this.filterRating.toLowerCase())
+    )
   }
 
   updateData(){
     this.dataService.getVideogames().subscribe({
       next: (data) => {
         this.videogames = data;
+        this.filteredGames = this.videogames;
       },
       error: (error) => {
         console.error("ERROR - Error fetching VIDOEGAMES : ", error);
