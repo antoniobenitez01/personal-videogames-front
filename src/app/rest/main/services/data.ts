@@ -16,7 +16,11 @@ export class DataService {
   }
 
   deleteVideogame(id : number){
-    return this.http.delete(this.url + '/' + id, { responseType : 'text'});
+    return this.http.delete(`${this.url}/${id}`, { responseType : 'text'});
+  }
+
+  updateVideogame(data : Videogame){
+    return this.http.put(`${this.url}/update/${data.id}`, data, { responseType : 'text'});
   }
 
   postVideogame(data : ExportVideogame): Observable<any> {

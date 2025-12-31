@@ -1,0 +1,51 @@
+<h2 mat-dialog-title>Create Item</h2>
+
+<mat-dialog-content [formGroup]="form">
+
+  <!-- Title -->
+  <mat-form-field appearance="fill" class="full-width">
+    <mat-label>Title</mat-label>
+    <input matInput formControlName="title" />
+  </mat-form-field>
+
+  <!-- Dropdown -->
+  <mat-form-field appearance="fill" class="full-width">
+    <mat-label>Platform</mat-label>
+    <mat-select formControlName="platform">
+      @for (p of platforms; track p) {
+        <mat-option [value]="p">{{ p.replaceAll("_"," ") }}</mat-option>
+      }
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill" class="full-width">
+    <mat-label>Rating</mat-label>
+    <mat-select formControlName="rating">
+      @for (r of ratings; track r) {
+        <mat-option [value]="r">{{ r.replaceAll("_"," ") }}</mat-option>
+      }
+    </mat-select>
+  </mat-form-field>
+
+  <!-- Checkboxes -->
+  <mat-checkbox formControlName="collection">Collection</mat-checkbox>
+  <br />
+  <mat-checkbox formControlName="fangame">Fangame</mat-checkbox>
+  <br />
+  <mat-checkbox formControlName="flash">Flash</mat-checkbox>
+  <br />
+  <mat-checkbox formControlName="favourite">Favourite</mat-checkbox>
+
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button
+    mat-flat-button
+    color="primary"
+    (click)="submit()"
+    [disabled]="form.invalid"
+  >
+    Submit
+  </button>
+</mat-dialog-actions>

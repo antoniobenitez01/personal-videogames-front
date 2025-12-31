@@ -1,19 +1,45 @@
 <app-iconbar (update)="onUpdate($event)"></app-iconbar>
+
 <div class="filters mb-3">
+
   <input placeholder="Filter by title" [(ngModel)]="filterTitle" (input)="applyFilters()" class="form-control mb-1" />
+
   <select [(ngModel)]="filterPlatform" (change)="applyFilters()" class="form-control mb-1">
     <option value="">All Platforms</option>
     @for(p of platforms; track p){
       <option [value]="p">{{ p.replaceAll("_"," ") }}</option>
     }
   </select>
+
   <select [(ngModel)]="filterRating" (change)="applyFilters()" class="form-control">
     <option value="">All Ratings</option>
     @for(r of ratings; track r){
       <option [value]="r">{{ r.replaceAll("_"," ") }}</option>
     }
   </select>
+
+  <div class="form-check form-check-inline">
+    <input type="checkbox" class="form-check-input" id="collectionFilter" [(ngModel)]="filterCollection" (change)="applyFilters()">
+    <label class="form-check-label" for="collectionFilter">Collection</label>
+  </div>
+
+  <div class="form-check form-check-inline">
+    <input type="checkbox" class="form-check-input" id="fangameFilter" [(ngModel)]="filterFangame" (change)="applyFilters()">
+    <label class="form-check-label" for="fangameFilter">Fangame</label>
+  </div>
+
+  <div class="form-check form-check-inline">
+    <input type="checkbox" class="form-check-input" id="flashFilter" [(ngModel)]="filterFlash" (change)="applyFilters()">
+    <label class="form-check-label" for="flashFilter">Flash</label>
+  </div>
+
+  <div class="form-check form-check-inline">
+    <input type="checkbox" class="form-check-input" id="favouriteFilter" [(ngModel)]="filterFavourite" (change)="applyFilters()">
+    <label class="form-check-label" for="favouriteFilter">Favourite</label>
+  </div>
+
 </div>
+
 @if(filteredGames.length == 0){
   <h1>No Videogames. Too Bad !</h1>
 }@else {
@@ -28,6 +54,7 @@
         <th>FANGAME</th>
         <th>FLASH</th>
         <th>FAVOURITE</th>
+        <th>EDIT</th>
         <th>DELETE</th>
       </tr>
     </thead>
@@ -57,6 +84,9 @@
             @if(game.favourite){
               &#x2B50;
             }
+          </td>
+          <td class="cellcenter">
+            <button (click)="editVideogame(game)" class="btn btn-primary">EDIT</button>
           </td>
           <td class="cellcenter">
             <button (click)="deleteVideogame(game.id)" class="btn btn-danger">X</button>
