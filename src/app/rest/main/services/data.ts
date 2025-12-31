@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Videogame } from '../interfaces/videogame';
+import { ExportVideogame, Videogame } from '../interfaces/videogame';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -17,5 +17,9 @@ export class DataService {
 
   deleteVideogame(id : number){
     return this.http.delete(this.url + '/' + id, { responseType : 'text'});
+  }
+
+  postVideogame(data : ExportVideogame): Observable<any> {
+    return this.http.post(this.url + '/add', data, { responseType: 'text' });
   }
 }

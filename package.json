@@ -7,10 +7,10 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "git:add" : "git add .",
-    "git:commit" : "git commit -m \"Automatic Angular Push\"",
-    "git:push" : "git push -u origin main",
-    "git:auto" : "npm run git:add && npm run git:commit && npm run git:push && npm run start"
+    "git:add": "git add .",
+    "git:commit": "git commit -m \"Automatic Angular Push\"",
+    "git:push": "git push -u origin main",
+    "git:auto": "npm run git:add && npm run git:commit && npm run git:push && npm run start"
   },
   "prettier": {
     "printWidth": 100,
@@ -26,10 +26,12 @@
   },
   "private": true,
   "dependencies": {
+    "@angular/cdk": "^20.2.14",
     "@angular/common": "^20.3.0",
     "@angular/compiler": "^20.3.0",
     "@angular/core": "^20.3.0",
     "@angular/forms": "^20.3.0",
+    "@angular/material": "^20.2.14",
     "@angular/platform-browser": "^20.3.0",
     "@angular/router": "^20.3.0",
     "rxjs": "~7.8.0",

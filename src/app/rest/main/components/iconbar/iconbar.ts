@@ -1,4 +1,6 @@
 import { Component, EventEmitter, Output } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { AddGameComponent } from '../addgame/addgame';
 
 @Component({
   selector: 'app-iconbar',
@@ -8,9 +10,18 @@ import { Component, EventEmitter, Output } from '@angular/core';
 })
 export class Iconbar {
 
+  constructor(private dialog: MatDialog){}
+
   @Output() update = new EventEmitter<boolean>();
 
   sendUpdate(){
     this.update.emit(true);
+  }
+
+  openDialog(){
+    const dialogRef = this.dialog.open(AddGameComponent);
+    dialogRef.afterClosed().subscribe(result => {
+      console.info(result);
+    });
   }
 }
