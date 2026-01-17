@@ -1,26 +1,14 @@
 import { Component } from '@angular/core';
-import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { MatButtonModule } from '@angular/material/button';
-import { MatCheckboxModule } from '@angular/material/checkbox';
-import { MatDialogRef, MatDialogModule } from '@angular/material/dialog';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatDialogRef } from '@angular/material/dialog';
 import { DataService } from '../../services/data';
 import { ExportVideogame } from '../../interfaces/videogame';
-import { MatSelectModule } from '@angular/material/select';
 import { PLATFORMS, RATINGS } from '../../shared/constants';
+import { MaterialModule } from '../../shared/material-module';
 
 @Component({
   selector: 'app-addgame',
-  imports: [
-    ReactiveFormsModule,
-    MatDialogModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatCheckboxModule,
-    MatButtonModule,
-    MatSelectModule
-  ],
+  imports: [ MaterialModule ],
   templateUrl: './addgame.html',
   styleUrl: './addgame.css',
 })
@@ -30,7 +18,9 @@ export class AddGameComponent {
     title : new FormControl<string>('',{ nonNullable: true, validators: Validators.required }),
     platform : new FormControl<string>('',{ nonNullable: true, validators: Validators.required }),
     rating : new FormControl<string>('',{ nonNullable: true, validators: Validators.required }),
+    genres : new FormControl<string[]>([],{nonNullable: true}),
     collection : new FormControl<boolean>(false, { nonNullable : true }),
+    romhack : new FormControl<boolean>(false, { nonNullable : true }),
     fangame : new FormControl<boolean>(false, { nonNullable : true }),
     flash : new FormControl<boolean>(false, { nonNullable : true }),
     favourite : new FormControl<boolean>(false, { nonNullable : true })
@@ -46,6 +36,24 @@ export class AddGameComponent {
   platforms = PLATFORMS;
   ratings = RATINGS;
 
+  addGenre(event: any){
+    let value = event.value?.trim();
+    if(!value) return;
+
+    this.form.controls.genres.setValue([
+      ...this.form.controls.genres.value,
+      value
+    ]);
+
+    event.chipInput.clear();
+  }
+
+  removeGenre(genre: string){
+    this.form.controls.genres.setValue(
+      this.form.controls.genres.value.filter(gen => gen !== genre)
+    );
+  }
+
   submit() {
     if (this.form.valid) {
       this.submitting = true;
@@ -54,7 +62,9 @@ export class AddGameComponent {
         title: this.form.controls['title'].value,
         platform: this.form.controls['platform'].value,
         rating: this.form.controls['rating'].value,
+        genres: this.form.controls['genres'].value,
         collection: this.form.controls['collection'].value,
+        romhack: this.form.controls['romhack'].value,
         fangame: this.form.controls['fangame'].value,
         flash: this.form.controls['flash'].value,
         favourite: this.form.controls['favourite'].value

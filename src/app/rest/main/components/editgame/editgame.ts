@@ -1,26 +1,14 @@
 import { Component, Inject } from '@angular/core';
-import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { MatButtonModule } from '@angular/material/button';
-import { MatCheckboxModule } from '@angular/material/checkbox';
-import { MatDialogRef, MatDialogModule, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { DataService } from '../../services/data';
-import { Videogame } from '../../interfaces/videogame';
-import { MatSelectModule } from '@angular/material/select';
+import { Videogame, EditGameForm } from '../../interfaces/videogame';
 import { PLATFORMS, RATINGS } from '../../shared/constants';
+import { MaterialModule } from '../../shared/material-module';
 
 @Component({
   selector: 'app-editgame',
-  imports: [
-    ReactiveFormsModule,
-    MatDialogModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatCheckboxModule,
-    MatButtonModule,
-    MatSelectModule
-  ],
+  imports: [ MaterialModule ],
   templateUrl: './editgame.html',
   styleUrl: './editgame.css',
 })
@@ -28,18 +16,20 @@ export class EditGameComponent {
   platforms = PLATFORMS;
   ratings = RATINGS;
 
-  form: FormGroup = new FormGroup({});
+  form: FormGroup<EditGameForm>;
 
   constructor(
     private dialogRef: MatDialogRef<EditGameComponent>,
     private dataService : DataService,
     @Inject(MAT_DIALOG_DATA) public data : Videogame | null
   ){
-    this.form = new FormGroup({
+    this.form = new FormGroup<EditGameForm>({
       title : new FormControl(data?.title || '', { nonNullable: true, validators: Validators.required }),
       platform : new FormControl(data?.platform || '', { nonNullable: true, validators: Validators.required }),
       rating : new FormControl(data?.rating || '', { nonNullable: true, validators: Validators.required }),
+      genres : new FormControl(data?.genres || [], { nonNullable: true }),
       collection : new FormControl(data?.collection || false, { nonNullable: true }),
+      romhack : new FormControl(data?.romhack || false, { nonNullable: true }),
       fangame : new FormControl(data?.fangame || false, { nonNullable: true }),
       flash : new FormControl(data?.flash || false, { nonNullable: true }),
       favourite : new FormControl(data?.favourite || false, { nonNullable: true }),

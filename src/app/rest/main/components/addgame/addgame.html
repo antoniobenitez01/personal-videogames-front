@@ -27,8 +27,30 @@
     </mat-select>
   </mat-form-field>
 
+  <mat-form-field appearance="fill" class="full-width">
+    <mat-label>Genres</mat-label>
+
+    <mat-chip-grid #chipGrid formControlName="genres">
+      @for(genre of form.controls.genres.value; track $index){
+        <mat-chip-row (removed)="removeGenre(genre)">
+          {{ genre }}
+          <button matChipRemove>
+            <mat-icon>cancel</mat-icon>
+          </button>
+        </mat-chip-row>
+      }
+    </mat-chip-grid>
+    <input
+        placeholder="Add genre"
+        [matChipInputFor]="chipGrid"
+        [matChipInputSeparatorKeyCodes]="[13,188]"
+        (matChipInputTokenEnd)="addGenre($event)" />
+  </mat-form-field>
+
   <!-- Checkboxes -->
   <mat-checkbox formControlName="collection">Collection</mat-checkbox>
+  <br />
+  <mat-checkbox formControlName="romhack">Romhack</mat-checkbox>
   <br />
   <mat-checkbox formControlName="fangame">Fangame</mat-checkbox>
   <br />
