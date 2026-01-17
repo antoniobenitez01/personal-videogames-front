@@ -68,3 +68,12 @@ export const PLATFORMS : string[] = [
     "FANTASTIC",
     "BEST"
   ];
+  export const DIFFICULTIES : string[] = [
+    "VERY_EASY",
+    "EASY",
+    "NORMAL",
+    "CHALLENGING",
+    "HARD",
+    "VERY_HARD",
+    "NIGHTMARE"
+  ];

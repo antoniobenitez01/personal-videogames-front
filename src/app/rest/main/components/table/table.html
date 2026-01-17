@@ -61,7 +61,14 @@
               </mat-icon>
             </button>
           </th>
-          <th>DIFFICULTY</th>
+          <th>
+            DIFFICULTY
+            <button mat-icon-button (click)="toggleDifficultySort()">
+              <mat-icon class="white-icon">
+                {{ difficultySort === 'asc' ? 'arrow_upward' : difficultySort === 'desc' ? 'arrow_downward' : 'swap_vert' }}
+              </mat-icon>
+            </button>
+          </th>
           <th>GENRES</th>
           <th>FANGAME</th>
           <th>FAVOURITE</th>

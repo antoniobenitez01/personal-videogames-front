@@ -3,7 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { DataService } from '../../services/data';
 import { ExportVideogame } from '../../interfaces/videogame';
-import { PLATFORMS, RATINGS } from '../../shared/constants';
+import { DIFFICULTIES, PLATFORMS, RATINGS } from '../../shared/constants';
 import { MaterialModule } from '../../shared/material-module';
 
 @Component({
@@ -18,11 +18,9 @@ export class AddGameComponent {
     title : new FormControl<string>('',{ nonNullable: true, validators: Validators.required }),
     platform : new FormControl<string>('',{ nonNullable: true, validators: Validators.required }),
     rating : new FormControl<string>('',{ nonNullable: true, validators: Validators.required }),
+    difficulty : new FormControl<string>('',{ nonNullable: true, validators: Validators.required }),
     genres : new FormControl<string[]>([],{nonNullable: true}),
-    collection : new FormControl<boolean>(false, { nonNullable : true }),
-    romhack : new FormControl<boolean>(false, { nonNullable : true }),
     fangame : new FormControl<boolean>(false, { nonNullable : true }),
-    flash : new FormControl<boolean>(false, { nonNullable : true }),
     favourite : new FormControl<boolean>(false, { nonNullable : true })
   });
 
@@ -35,6 +33,7 @@ export class AddGameComponent {
 
   platforms = PLATFORMS;
   ratings = RATINGS;
+  difficulties = DIFFICULTIES;
 
   addGenre(event: any){
     let value = event.value?.trim();
@@ -68,11 +67,9 @@ export class AddGameComponent {
         title: this.form.controls['title'].value,
         platform: this.form.controls['platform'].value,
         rating: this.form.controls['rating'].value,
+        difficulty: this.form.controls['difficulty'].value,
         genres: this.form.controls['genres'].value,
-        collection: this.form.controls['collection'].value,
-        romhack: this.form.controls['romhack'].value,
         fangame: this.form.controls['fangame'].value,
-        flash: this.form.controls['flash'].value,
         favourite: this.form.controls['favourite'].value
       };
 

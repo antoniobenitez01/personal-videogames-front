@@ -28,6 +28,15 @@
   </mat-form-field>
 
   <mat-form-field appearance="fill" class="full-width">
+    <mat-label>Difficulty</mat-label>
+    <mat-select formControlName="difficulty">
+      @for (d of difficulties; track d) {
+        <mat-option [value]="d">{{ d.replaceAll("_"," ") }}</mat-option>
+      }
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill" class="full-width">
     <mat-label>Genres</mat-label>
 
     <mat-chip-grid #chipGrid formControlName="genres">
@@ -47,14 +56,7 @@
         (matChipInputTokenEnd)="addGenre($event)" />
   </mat-form-field>
 
-  <!-- Checkboxes -->
-  <mat-checkbox formControlName="collection">Collection</mat-checkbox>
-  <br />
-  <mat-checkbox formControlName="romhack">Romhack</mat-checkbox>
-  <br />
   <mat-checkbox formControlName="fangame">Fangame</mat-checkbox>
-  <br />
-  <mat-checkbox formControlName="flash">Flash</mat-checkbox>
   <br />
   <mat-checkbox formControlName="favourite">Favourite</mat-checkbox>
 
