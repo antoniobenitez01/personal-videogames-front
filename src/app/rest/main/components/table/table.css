@@ -1,6 +1,19 @@
+.filtersContainer{
+  width:90vw;
+  padding:10px;
+  border-radius: 15px;
+}
+.filtersDiv{
+  width:100%;
+  display:flex;
+  flex-direction: row;
+  gap: 5px;
+  align-items: flex-start
+}
+
 table{
   margin-top:0;
-  width:85vw
+  width:100%;
 }
 .cellcenter{
   text-align:center;
@@ -18,6 +31,7 @@ table{
 .genres{
   width:7vw
 }
+
 .boxfilter{
   height:5vh;
   align-content: center;
@@ -26,6 +40,10 @@ table{
   font-weight: bold;
   font-size: 0.80vw;
   margin-bottom:0;
+  display:flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  align-items: center;
 }
 .form-check{
   align-content:center
