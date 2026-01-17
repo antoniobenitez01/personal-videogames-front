@@ -20,15 +20,14 @@ export class TableComponent {
   //private subscription! : Subscription;
 
   ratingSort: 'asc' | 'desc' | '' = '';
+  difficultySort: 'asc' | 'desc' | '' = '';
 
   filterTitle = '';
   filterPlatform = '';
   filterRating = '';
+  filterDifficulty = '';
 
-  filterCollection = false;
-  filterRomhack = false;
   filterFangame = false;
-  filterFlash = false;
   filterFavourite = false;
 
   platforms = PLATFORMS;
@@ -47,10 +46,8 @@ export class TableComponent {
       (!this.filterTitle || game.title.toLowerCase().includes(this.filterTitle.toLowerCase())) &&
       (!this.filterPlatform || game.platform === this.filterPlatform) &&
       (!this.filterRating || game.rating === this.filterRating) &&
-      (!this.filterRomhack || game.romhack) &&
-      (!this.filterCollection || game.collection) &&
+      (!this.filterDifficulty || game.difficulty === this.filterDifficulty) &&
       (!this.filterFangame || game.fangame) &&
-      (!this.filterFlash || game.flash) &&
       (!this.filterFavourite || game.favourite)
     );
     if (this.ratingSort) {
@@ -59,12 +56,25 @@ export class TableComponent {
         return b.rating.localeCompare(a.rating);
       });
     }
+    if (this.difficultySort) {
+      this.filteredGames.sort((a, b) => {
+        if (this.difficultySort === 'asc') return a.difficulty.localeCompare(b.difficulty);
+        return b.difficulty.localeCompare(a.difficulty);
+      });
+    }
   }
 
   toggleRatingSort() {
     if (!this.ratingSort) this.ratingSort = 'asc';
     else if (this.ratingSort === 'asc') this.ratingSort = 'desc';
     else this.ratingSort = '';
+    this.applyFilters();
+  }
+
+  toggleDifficultySort() {
+    if (!this.difficultySort) this.difficultySort = 'asc';
+    else if (this.difficultySort === 'asc') this.difficultySort = 'desc';
+    else this.difficultySort = '';
     this.applyFilters();
   }
 

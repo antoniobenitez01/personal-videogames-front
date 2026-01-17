@@ -34,17 +34,8 @@
   <div class="boxfilter mt-1">
     <div class="form-check form-check-inline">
 
-      <input type="checkbox" class="form-check-input" id="collectionFilter" [(ngModel)]="filterCollection" (change)="applyFilters()">
-      <label class="form-check-label" for="collectionFilter">Collection</label> </div> <div class="form-check form-check-inline">
-
-        <input type="checkbox" class="form-check-input" id="romhackFilter" [(ngModel)]="filterRomhack" (change)="applyFilters()">
-      <label class="form-check-label" for="romhackFilter">Romhack</label> </div> <div class="form-check form-check-inline">
-
       <input type="checkbox" class="form-check-input" id="fangameFilter" [(ngModel)]="filterFangame" (change)="applyFilters()">
       <label class="form-check-label" for="fangameFilter">Fangame</label> </div> <div class="form-check form-check-inline">
-
-      <input type="checkbox" class="form-check-input" id="flashFilter" [(ngModel)]="filterFlash" (change)="applyFilters()">
-      <label class="form-check-label" for="flashFilter">Flash</label> </div> <div class="form-check form-check-inline">
 
       <input type="checkbox" class="form-check-input" id="favouriteFilter" [(ngModel)]="filterFavourite" (change)="applyFilters()">
       <label class="form-check-label" for="favouriteFilter">Favourite</label>
@@ -70,11 +61,9 @@
               </mat-icon>
             </button>
           </th>
+          <th>DIFFICULTY</th>
           <th>GENRES</th>
-          <th>COLLECTION</th>
-          <th>ROMHACK</th>
           <th>FANGAME</th>
-          <th>FLASH</th>
           <th>FAVOURITE</th>
           <th>EDIT</th>
           <th>DELETE</th>
@@ -97,22 +86,7 @@
               </div>
             </td>
             <td class="cellcenter">
-              @if(game.collection){
-                &#x2705;
-              }
-            </td>
-            <td class="cellcenter">
-              @if(game.romhack){
-                &#x2705;
-              }
-            </td>
-            <td class="cellcenter">
               @if(game.fangame){
-                &#x2705;
-              }
-            </td>
-            <td class="cellcenter">
-              @if(game.flash){
                 &#x2705;
               }
             </td>
