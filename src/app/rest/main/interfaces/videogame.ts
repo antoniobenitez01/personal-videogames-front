@@ -1,7 +1,7 @@
 import { FormControl } from "@angular/forms";
 
 export interface Videogame {
-  id: number;
+  id?: number;
   title: string;
   platform: string;
   rating: string;

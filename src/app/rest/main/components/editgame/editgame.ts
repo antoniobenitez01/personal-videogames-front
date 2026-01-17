@@ -36,11 +36,29 @@ export class EditGameComponent {
     })
   }
 
+  addGenre(event: any){
+    let value = event.value?.trim();
+    if(!value) return;
+
+    this.form.controls.genres.setValue([
+      ...this.form.controls.genres.value,
+      value
+    ]);
+
+    event.chipInput.clear();
+  }
+
+  removeGenre(genre: string){
+    this.form.controls.genres.setValue(
+      this.form.controls.genres.value.filter(gen => gen !== genre)
+    );
+  }
+
   submit(){
     if (this.form.valid){
       const videogame : Videogame = {
         ...this.data,
-        ...this.form.value
+        ...this.form.getRawValue()
       };
       const obs = this.data ? this.dataService.updateVideogame( videogame ) : this.dataService.postVideogame( videogame );
       obs.subscribe({
