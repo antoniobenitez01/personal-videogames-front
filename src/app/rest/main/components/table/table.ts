@@ -4,7 +4,6 @@ import { DataService } from '../../services/data';
 import { PLATFORMS, RATINGS } from '../../shared/constants';
 import { EditGameComponent } from '../editgame/editgame';
 import { MatDialog } from '@angular/material/dialog';
-import { FormControl } from '@angular/forms';
 //import { interval, Subscription } from 'rxjs';
 //import { switchMap } from 'rxjs/operators';
 
@@ -20,10 +19,12 @@ export class TableComponent {
   filteredGames : Videogame[] = [];
   //private subscription! : Subscription;
 
-  platformControl = new FormControl<string[]>([]);
-  ratingControl = new FormControl<string[]>([]);
+  ratingSort: 'asc' | 'desc' | '' = '';
 
   filterTitle = '';
+  filterPlatform = '';
+  filterRating = '';
+
   filterCollection = false;
   filterFangame = false;
   filterFlash = false;
@@ -38,29 +39,43 @@ export class TableComponent {
   )
   {
     this.updateData();
-    this.platformControl.valueChanges.subscribe(() => this.applyFilters());
-    this.ratingControl.valueChanges.subscribe(() => this.applyFilters());
   }
 
-  applyFilters() {
-    const selectedPlatforms = this.platformControl.value;
-    const selectedRatings = this.ratingControl.value;
-
+  applyFilters(){
     this.filteredGames = this.videogames.filter(game =>
       (!this.filterTitle || game.title.toLowerCase().includes(this.filterTitle.toLowerCase())) &&
-      (!selectedPlatforms?.length || selectedPlatforms.includes(game.platform)) &&
-      (!selectedRatings?.length || selectedRatings.includes(game.rating)) &&
+      (!this.filterPlatform || game.platform === this.filterPlatform) &&
+      (!this.filterRating || game.rating === this.filterRating) &&
       (!this.filterCollection || game.collection) &&
       (!this.filterFangame || game.fangame) &&
       (!this.filterFlash || game.flash) &&
       (!this.filterFavourite || game.favourite)
     );
+    if (this.ratingSort) {
+      this.filteredGames.sort((a, b) => {
+        if (this.ratingSort === 'asc') return a.rating.localeCompare(b.rating);
+        return b.rating.localeCompare(a.rating);
+      });
+    }
   }
 
-  updateData() {
-    this.dataService.getVideogames().subscribe(games => {
-      this.videogames = games;
-      this.applyFilters();
+  toggleRatingSort() {
+    if (!this.ratingSort) this.ratingSort = 'asc';
+    else if (this.ratingSort === 'asc') this.ratingSort = 'desc';
+    else this.ratingSort = '';
+    this.applyFilters();
+  }
+
+  updateData(){
+    this.dataService.getVideogames().subscribe({
+      next: (data) => {
+        this.videogames = data;
+        this.filteredGames = [...this.videogames];
+        this.applyFilters();
+      },
+      error: (error) => {
+        console.error("ERROR - Error fetching VIDOEGAMES : ", error);
+      }
     });
   }
 

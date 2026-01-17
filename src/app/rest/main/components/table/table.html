@@ -1,21 +1,34 @@
 <app-iconbar (update)="onUpdate($event)"></app-iconbar>
 
-<div class="filters mb-1 mt-1">
-  <input placeholder="Filter by title" [(ngModel)]="filterTitle" (input)="applyFilters()" class="form-control mb-1" />
+<div>
+  <div style="width:100%; display:flex; flex-direction: column;">
 
-  <select [(ngModel)]="filterPlatform" (change)="applyFilters()" class="form-control mb-1">
-    <option value="">All Platforms</option>
-    @for(p of platforms; track p){
-      <option [value]="p">{{ p.replaceAll("_"," ") }}</option>
-    }
-  </select>
+    <mat-form-field class="w-100" appearance="outline">
+      <mat-label>Filter by Title</mat-label>
+      <input matInput placeholder="Title" value="" [(ngModel)]="filterTitle" (input)="applyFilters()">
+    </mat-form-field>
 
-  <select [(ngModel)]="filterRating" (change)="applyFilters()" class="form-control">
-    <option value="">All Ratings</option>
-    @for(r of ratings; track r){
-      <option [value]="r">{{ r.replaceAll("_"," ") }}</option>
-    }
-  </select>
+    <mat-form-field class="w-100" appearance="outline">
+      <mat-label>Platform</mat-label>
+      <mat-select [(ngModel)]="filterPlatform" (selectionChange)="applyFilters()">
+        <mat-option value="">All Platforms</mat-option>
+        @for (p of platforms; track p) {
+          <mat-option [value]="p">{{ p.replaceAll('_', ' ') }}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" floatLabel="always">
+      <mat-label>Rating</mat-label>
+      <mat-select [(ngModel)]="filterRating" (selectionChange)="applyFilters()">
+        <mat-option value="">All Ratings</mat-option>
+        @for (r of ratings; track r) {
+          <mat-option [value]="r">{{ r.replaceAll('_', ' ') }}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+
+  </div>
 
   <div class="boxfilter mt-1">
 
@@ -51,7 +64,14 @@
         <th>ID</th>
         <th>TITLE</th>
         <th>PLATFORM</th>
-        <th>RATING</th>
+        <th>
+          RATING
+          <button mat-icon-button (click)="toggleRatingSort()">
+            <mat-icon class="white-icon">
+              {{ ratingSort === 'asc' ? 'arrow_upward' : ratingSort === 'desc' ? 'arrow_downward' : 'swap_vert' }}
+            </mat-icon>
+          </button>
+        </th>
         <th>GENRES</th>
         <th>COLLECTION</th>
         <th>ROMHACK</th>
