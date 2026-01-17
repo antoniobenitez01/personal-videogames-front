@@ -1,5 +1,5 @@
-import { Component, EventEmitter } from '@angular/core';
-import { ExportVideogame, Videogame } from '../../interfaces/videogame';
+import { Component } from '@angular/core';
+import { Videogame } from '../../interfaces/videogame';
 import { DataService } from '../../services/data';
 import { PLATFORMS, RATINGS } from '../../shared/constants';
 import { EditGameComponent } from '../editgame/editgame';
@@ -26,6 +26,7 @@ export class TableComponent {
   filterRating = '';
 
   filterCollection = false;
+  filterRomhack = false;
   filterFangame = false;
   filterFlash = false;
   filterFavourite = false;
@@ -46,6 +47,7 @@ export class TableComponent {
       (!this.filterTitle || game.title.toLowerCase().includes(this.filterTitle.toLowerCase())) &&
       (!this.filterPlatform || game.platform === this.filterPlatform) &&
       (!this.filterRating || game.rating === this.filterRating) &&
+      (!this.filterRomhack || game.romhack) &&
       (!this.filterCollection || game.collection) &&
       (!this.filterFangame || game.fangame) &&
       (!this.filterFlash || game.flash) &&

@@ -30,11 +30,15 @@
     </mat-form-field>
 
   </div>
+
   <div class="boxfilter mt-1">
     <div class="form-check form-check-inline">
 
       <input type="checkbox" class="form-check-input" id="collectionFilter" [(ngModel)]="filterCollection" (change)="applyFilters()">
       <label class="form-check-label" for="collectionFilter">Collection</label> </div> <div class="form-check form-check-inline">
+
+        <input type="checkbox" class="form-check-input" id="romhackFilter" [(ngModel)]="filterRomhack" (change)="applyFilters()">
+      <label class="form-check-label" for="romhackFilter">Romhack</label> </div> <div class="form-check form-check-inline">
 
       <input type="checkbox" class="form-check-input" id="fangameFilter" [(ngModel)]="filterFangame" (change)="applyFilters()">
       <label class="form-check-label" for="fangameFilter">Fangame</label> </div> <div class="form-check form-check-inline">
@@ -48,7 +52,7 @@
     </div>
   </div>
 </div>
-<div style="width:90vw; background-color: blue;margin-top:2vh">
+<div style="width:90vw; margin-top:2vh; color: white">
   @if(filteredGames.length == 0){
     <h1>No Videogames. Too Bad !</h1>
   }@else {
