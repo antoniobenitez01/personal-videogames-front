@@ -15,21 +15,24 @@ table{
   margin-top:0;
   width:100%;
 }
-.cellcenter{
-  text-align:center;
-  width:0.5vw
+.id{
+  width:3vw
 }
 .platform{
   width:10vw
 }
 .rating{
-  width:7vw
+  width:6vw
 }
-.id{
-  width:3vw
+.difficulty{
+  width:7vw
 }
 .genres{
   width:7vw
+}
+.cellcenter{
+  text-align:center;
+  width:0.5vw
 }
 
 .boxfilter{

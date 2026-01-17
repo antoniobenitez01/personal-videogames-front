@@ -29,6 +29,16 @@
       </mat-select>
     </mat-form-field>
 
+    <mat-form-field class="w-100" appearance="fill" floatLabel="always">
+      <mat-label>Difficulty</mat-label>
+      <mat-select [(ngModel)]="filterDifficulty" (selectionChange)="applyFilters()">
+        <mat-option value="">All Difficulties</mat-option>
+        @for (d of difficulties; track d) {
+          <mat-option [value]="d">{{ d.replaceAll('_', ' ') }}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+
   </div>
 
   <div class="boxfilter mt-1">
@@ -82,7 +92,8 @@
             <td class="id">{{ game.id }}</td>
             <td>{{ game.title }}</td>
             <td class="platform">{{ game.platform.replaceAll("_"," ") }}</td>
-            <td class="rating">{{ game.rating }}</td>
+            <td class="rating">{{ game.rating.replaceAll('_', ' ') }}</td>
+            <td class="difficulty">{{ game.difficulty.replaceAll('_', ' ') }}</td>
             <td class="cellcenter">
               <div class="d-flex flex-wrap gap-1 justify-content-center genres">
                 @for (genre of game.genres; track genre) {

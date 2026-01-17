@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Videogame } from '../../interfaces/videogame';
 import { DataService } from '../../services/data';
-import { PLATFORMS, RATINGS } from '../../shared/constants';
+import { DIFFICULTIES, PLATFORMS, RATINGS } from '../../shared/constants';
 import { EditGameComponent } from '../editgame/editgame';
 import { MatDialog } from '@angular/material/dialog';
 //import { interval, Subscription } from 'rxjs';
@@ -32,6 +32,7 @@ export class TableComponent {
 
   platforms = PLATFORMS;
   ratings = RATINGS;
+  difficulties = DIFFICULTIES;
 
   constructor(
     private dialog : MatDialog,
@@ -52,14 +53,14 @@ export class TableComponent {
     );
     if (this.ratingSort) {
       this.filteredGames.sort((a, b) => {
-        if (this.ratingSort === 'asc') return a.rating.localeCompare(b.rating);
-        return b.rating.localeCompare(a.rating);
+        if (this.ratingSort === 'asc') return this.ratings.indexOf(a.rating) - this.ratings.indexOf(b.rating)
+        return this.ratings.indexOf(b.rating) - this.ratings.indexOf(a.rating)
       });
     }
     if (this.difficultySort) {
       this.filteredGames.sort((a, b) => {
-        if (this.difficultySort === 'asc') return a.difficulty.localeCompare(b.difficulty);
-        return b.difficulty.localeCompare(a.difficulty);
+        if (this.difficultySort === 'asc') return this.difficulties.indexOf(a.difficulty) - this.difficulties.indexOf(b.difficulty)
+        return this.difficulties.indexOf(b.difficulty) - this.difficulties.indexOf(a.difficulty)
       });
     }
   }
