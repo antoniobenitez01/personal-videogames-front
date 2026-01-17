@@ -4,6 +4,7 @@ import { DataService } from '../../services/data';
 import { PLATFORMS, RATINGS } from '../../shared/constants';
 import { EditGameComponent } from '../editgame/editgame';
 import { MatDialog } from '@angular/material/dialog';
+import { FormControl } from '@angular/forms';
 //import { interval, Subscription } from 'rxjs';
 //import { switchMap } from 'rxjs/operators';
 
@@ -19,10 +20,10 @@ export class TableComponent {
   filteredGames : Videogame[] = [];
   //private subscription! : Subscription;
 
-  filterTitle = '';
-  filterPlatform = '';
-  filterRating = '';
+  platformControl = new FormControl<string[]>([]);
+  ratingControl = new FormControl<string[]>([]);
 
+  filterTitle = '';
   filterCollection = false;
   filterFangame = false;
   filterFlash = false;
@@ -37,30 +38,29 @@ export class TableComponent {
   )
   {
     this.updateData();
+    this.platformControl.valueChanges.subscribe(() => this.applyFilters());
+    this.ratingControl.valueChanges.subscribe(() => this.applyFilters());
   }
 
-  applyFilters(){
+  applyFilters() {
+    const selectedPlatforms = this.platformControl.value;
+    const selectedRatings = this.ratingControl.value;
+
     this.filteredGames = this.videogames.filter(game =>
       (!this.filterTitle || game.title.toLowerCase().includes(this.filterTitle.toLowerCase())) &&
-      (!this.filterPlatform || game.platform === this.filterPlatform) &&
-      (!this.filterRating || game.rating === this.filterRating) &&
+      (!selectedPlatforms?.length || selectedPlatforms.includes(game.platform)) &&
+      (!selectedRatings?.length || selectedRatings.includes(game.rating)) &&
       (!this.filterCollection || game.collection) &&
       (!this.filterFangame || game.fangame) &&
       (!this.filterFlash || game.flash) &&
       (!this.filterFavourite || game.favourite)
-    )
+    );
   }
 
-  updateData(){
-    this.dataService.getVideogames().subscribe({
-      next: (data) => {
-        this.videogames = data;
-        this.filteredGames = [...this.videogames];
-        this.applyFilters();
-      },
-      error: (error) => {
-        console.error("ERROR - Error fetching VIDOEGAMES : ", error);
-      }
+  updateData() {
+    this.dataService.getVideogames().subscribe(games => {
+      this.videogames = games;
+      this.applyFilters();
     });
   }
 
