@@ -13,7 +13,7 @@ import { MaterialModule } from '../../shared/material-module';
   styleUrl: './addgame.css',
 })
 export class AddGameComponent {
-[x: string]: any;
+
   form = new FormGroup({
     title : new FormControl<string>('',{ nonNullable: true, validators: Validators.required }),
     platform : new FormControl<string>('',{ nonNullable: true, validators: Validators.required }),

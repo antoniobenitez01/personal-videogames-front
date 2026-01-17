@@ -3,7 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { DataService } from '../../services/data';
 import { Videogame, EditGameForm } from '../../interfaces/videogame';
-import { PLATFORMS, RATINGS } from '../../shared/constants';
+import { DIFFICULTIES, PLATFORMS, RATINGS } from '../../shared/constants';
 import { MaterialModule } from '../../shared/material-module';
 
 @Component({
@@ -13,8 +13,10 @@ import { MaterialModule } from '../../shared/material-module';
   styleUrl: './editgame.css',
 })
 export class EditGameComponent {
+
   platforms = PLATFORMS;
   ratings = RATINGS;
+  difficulties = DIFFICULTIES;
 
   form: FormGroup<EditGameForm>;
 
@@ -27,11 +29,9 @@ export class EditGameComponent {
       title : new FormControl(data?.title || '', { nonNullable: true, validators: Validators.required }),
       platform : new FormControl(data?.platform || '', { nonNullable: true, validators: Validators.required }),
       rating : new FormControl(data?.rating || '', { nonNullable: true, validators: Validators.required }),
+      difficulty : new FormControl(data?.difficulty || '', { nonNullable: true, validators: Validators.required }),
       genres : new FormControl(data?.genres || [], { nonNullable: true }),
-      collection : new FormControl(data?.collection || false, { nonNullable: true }),
-      romhack : new FormControl(data?.romhack || false, { nonNullable: true }),
       fangame : new FormControl(data?.fangame || false, { nonNullable: true }),
-      flash : new FormControl(data?.flash || false, { nonNullable: true }),
       favourite : new FormControl(data?.favourite || false, { nonNullable: true }),
     })
   }
