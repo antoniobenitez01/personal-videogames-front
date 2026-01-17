@@ -1,16 +1,22 @@
 table{
   margin-top:0;
-  width:80vw
+  width:85vw
 }
 .cellcenter{
   text-align:center;
   width:0.5vw
+}
+.platform{
+  width:10vw
 }
 .rating{
   width:7vw
 }
 .id{
   width:3vw
+}
+.genres{
+  width:7vw
 }
 .boxfilter{
   height:5vh;

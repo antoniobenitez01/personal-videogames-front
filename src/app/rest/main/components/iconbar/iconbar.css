@@ -1,13 +1,9 @@
 #iconbar{
   display:flex;
   flex-direction:row;
-  background-color:green;
+  justify-content:center
 }
 
-#update{
-  margin-left:auto;
-}
-
-#add{
-  margin-right:auto;
+#iconbar > button {
+  margin: 1em;
 }

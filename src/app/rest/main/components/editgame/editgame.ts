@@ -40,6 +40,12 @@ export class EditGameComponent {
     let value = event.value?.trim();
     if(!value) return;
 
+    const genres = this.form.controls.genres.value;
+    if (genres.some(g => g.toLowerCase() === value.toLowerCase())) {
+      event.chipInput.clear();
+      return;
+    }
+
     this.form.controls.genres.setValue([
       ...this.form.controls.genres.value,
       value

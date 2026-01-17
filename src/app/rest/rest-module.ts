@@ -5,6 +5,7 @@ import { MainPageComponent } from './main/main';
 import { TitleComponent } from './main/components/title/title';
 import { Iconbar } from './main/components/iconbar/iconbar';
 import { FormsModule } from '@angular/forms';
+import { MaterialModule } from './main/shared/material-module';
 
 
 
@@ -17,7 +18,8 @@ import { FormsModule } from '@angular/forms';
   ],
   imports: [
     CommonModule,
-    FormsModule
+    FormsModule,
+    MaterialModule
   ],
   exports: [
     MainPageComponent

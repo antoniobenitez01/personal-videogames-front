@@ -52,7 +52,9 @@
         <th>TITLE</th>
         <th>PLATFORM</th>
         <th>RATING</th>
+        <th>GENRES</th>
         <th>COLLECTION</th>
+        <th>ROMHACK</th>
         <th>FANGAME</th>
         <th>FLASH</th>
         <th>FAVOURITE</th>
@@ -65,10 +67,24 @@
         <tr>
           <td class="id">{{ game.id }}</td>
           <td>{{ game.title }}</td>
-          <td>{{ game.platform.replaceAll("_"," ") }}</td>
+          <td class="platform">{{ game.platform.replaceAll("_"," ") }}</td>
           <td class="rating">{{ game.rating }}</td>
           <td class="cellcenter">
+            <div class="d-flex flex-wrap gap-1 justify-content-center genres">
+              @for (genre of game.genres; track genre) {
+                <span class="badge bg-secondary">
+                  {{ genre.replaceAll('_', ' ') }}
+                </span>
+              }
+            </div>
+          </td>
+          <td class="cellcenter">
             @if(game.collection){
+              &#x2705;
+            }
+          </td>
+          <td class="cellcenter">
+            @if(game.romhack){
               &#x2705;
             }
           </td>
@@ -91,7 +107,7 @@
             <button (click)="editVideogame(game)" class="btn btn-primary">EDIT</button>
           </td>
           <td class="cellcenter">
-            <button (click)="deleteVideogame(game.id)" class="btn btn-danger">X</button>
+            <button (click)="deleteVideogame(game.id!)" class="btn btn-danger">X</button>
           </td>
         </tr>
       }
